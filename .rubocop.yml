@@ -167,6 +167,9 @@ Performance/EndWith:
 Performance/StartWith:
   SafeMultiline: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 RSpec/StubbedMock:
   Enabled: false
 
