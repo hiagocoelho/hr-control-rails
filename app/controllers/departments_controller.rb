@@ -17,7 +17,27 @@ class DepartmentsController < ApplicationController
     if department.save
       render json: department
     else
-      render json: { error: 'error while creating a department.' }, status: 422
+      render json: { error: department.errors.messages }, status: 422
+    end
+  end
+
+  def update
+    department = Department.find_by(id: params[:id])
+
+    if department.update(department_params)
+      render json: department
+    else
+      render json: { error: department.errors.messages }, status: 422
+    end
+  end
+
+  def destroy
+    department = Department.find_by(id: params[:id])
+
+    if department.destroy
+      head :no_content
+    else
+      render json: { error: department.errors.messages }, status: 422
     end
   end
 
