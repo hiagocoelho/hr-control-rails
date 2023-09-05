@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
   def index
     departments = Department.all
 
-    render json: DepartmentSerializer.new(departments, options).serializable_hash.to_json
+    render json: { departments: departments, total: departments.count }
   end
 
   def show

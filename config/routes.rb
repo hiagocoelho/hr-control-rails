@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/health', to: 'checks#health'
+  get '/metrics', to: 'checks#metrics'
 
   post '/departments', to: 'departments#create'
   get '/departments', to: 'departments#index'
