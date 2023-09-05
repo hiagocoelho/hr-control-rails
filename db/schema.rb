@@ -10,11 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_202750) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_111311) do
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "gender_identity"
+    t.date "birth_date"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "phone"
+    t.string "email_address"
+    t.boolean "verified", default: false
+    t.string "document"
+    t.string "image_url"
+    t.integer "role_id", null: false
+    t.integer "seniority_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_employees_on_role_id"
+    t.index ["seniority_id"], name: "index_employees_on_seniority_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -31,5 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_202750) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "employees", "roles"
+  add_foreign_key "employees", "seniorities"
   add_foreign_key "roles", "departments"
 end

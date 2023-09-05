@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   put '/seniorities/:id', to: 'seniorities#update'
   delete '/seniorities/:id', to: 'seniorities#destroy'
 
+  post '/employees', to: 'employees#create'
+  get '/employees', to: 'employees#index'
+  get '/employees/:id', to: 'employees#show'
+  put '/employees/:id', to: 'employees#update'
+  delete '/employees/:id', to: 'employees#destroy'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
