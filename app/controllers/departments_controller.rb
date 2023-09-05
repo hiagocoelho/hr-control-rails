@@ -2,13 +2,13 @@ class DepartmentsController < ApplicationController
   def index
     departments = Department.all
 
-    render json: { departments: departments }
+    render json: DepartmentSerializer.new(departments, options).serializable_hash.to_json
   end
 
   def show
     department = Department.find(params[:id])
 
-    render json: department
+    render json: DepartmentSerializer.new(department, options).serializable_hash.to_json
   end
 
   def create
@@ -45,5 +45,9 @@ class DepartmentsController < ApplicationController
 
   def department_params
     params.require(:department).permit(:name)
+  end
+
+  def options
+    @options ||= { include: %i[roles] }
   end
 end
