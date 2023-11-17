@@ -6,7 +6,7 @@ class RolesController < ApplicationController
               Role.all
             end
 
-    render json: { roles: roles, total: roles.count }
+    render json: { roles: RoleSerializer.new(roles).serializable_hash, total: roles.count }
   end
 
   def show
@@ -49,5 +49,9 @@ class RolesController < ApplicationController
 
   def role_params
     params.require(:role).permit(:name, :department_id)
+  end
+
+  def options
+    @options ||= { include: %i[department] }
   end
 end

@@ -1,6 +1,4 @@
 class DepartmentSerializer
   include JSONAPI::Serializer
-  attributes :name
-
-  has_many :roles
+  attributes :id, :name, :created_at, :updated_at
 end
