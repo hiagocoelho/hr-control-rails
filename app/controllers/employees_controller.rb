@@ -5,19 +5,20 @@ class EmployeesController < ApplicationController
                 else
                   Employee.all
                 end
-    render json: { employees: employees, total: employees.count }
+    render json: EmployeeSerializer.new(employees).serializable_hash.to_json
   end
 
   def show
     employee = Employee.find(params[:id])
-    render json: employee
+
+    render json: EmployeeSerializer.new(employee).serializable_hash.to_json
   end
 
   def create
     employee = Employee.new(employee_params)
 
     if employee.save
-      render json: employee
+      render json: EmployeeSerializer.new(employee).serializable_hash.to_json
     else
       render json: { error: employee.errors.messages }, status: 422
     end
@@ -27,7 +28,7 @@ class EmployeesController < ApplicationController
     employee = Employee.find(params[:id])
 
     if employee.update(employee_params)
-      render json: employee
+      render json: EmployeeSerializer.new(employee).serializable_hash.to_json
     else
       render json: { error: employee.errors.messages }, status: 422
     end
