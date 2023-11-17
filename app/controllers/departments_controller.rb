@@ -46,8 +46,4 @@ class DepartmentsController < ApplicationController
   def department_params
     params.require(:department).permit(:name)
   end
-
-  def options
-    @options ||= { include: %i[roles] }
-  end
 end
