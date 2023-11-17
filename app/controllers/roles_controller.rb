@@ -6,20 +6,20 @@ class RolesController < ApplicationController
               Role.all
             end
 
-    render json: { roles: RoleSerializer.new(roles).serializable_hash, total: roles.count }
+    render json: RoleSerializer.new(roles).serializable_hash.to_json
   end
 
   def show
     role = Role.find(params[:id])
 
-    render json: role
+    render json: RoleSerializer.new(role).serializable_hash.to_json
   end
 
   def create
     role = Role.new(role_params)
 
     if role.save
-      render json: role
+      render json: RoleSerializer.new(role).serializable_hash.to_json
     else
       render json: { error: role.errors.messages }, status: 422
     end
@@ -29,7 +29,7 @@ class RolesController < ApplicationController
     role = Role.find(params[:id])
 
     if role.update(role_params)
-      render json: role
+      render json: RoleSerializer.new(role).serializable_hash.to_json
     else
       render json: { error: role.errors.messages }, status: 422
     end
@@ -49,9 +49,5 @@ class RolesController < ApplicationController
 
   def role_params
     params.require(:role).permit(:name, :department_id)
-  end
-
-  def options
-    @options ||= { include: %i[department] }
   end
 end
